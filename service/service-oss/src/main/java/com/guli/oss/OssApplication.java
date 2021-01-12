@@ -1,0 +1,18 @@
+package com.guli.oss;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+
+/**
+ * @Author Alan_
+ * @create 2020/12/31 22:32
+ */
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@ComponentScan("com.guli")
+public class OssApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(OssApplication.class,args);
+    }
+}

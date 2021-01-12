@@ -1,0 +1,14 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: service-oss
+  profiles:
+    active: dev
+aliyun:
+  oss:
+    file:
+      endpoint: oss-cn-beijing.aliyuncs.com
+      keyid: LTAI4G34YpGBXWDXNWRSkVvk
+      keysecret: TITZoZfCSI0e5E390FhGMdjRZlQALX
+      bucketname: edugulionline
