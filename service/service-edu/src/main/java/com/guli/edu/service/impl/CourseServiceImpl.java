@@ -37,6 +37,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         CourseDescription cd = vo.getCourseDescription();
         cd.setId(courseId);
         courseDescriptionService.save(cd);
+
         return courseId;
     }
 }
