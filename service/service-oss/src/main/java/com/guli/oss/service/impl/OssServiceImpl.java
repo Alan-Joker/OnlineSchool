@@ -28,7 +28,7 @@ import java.util.UUID;
 @Service
 public class OssServiceImpl implements OssService {
 
-    private static String[] TYPESTR = {".png",".jpg",".bmp",".gif",".jpeg"};
+    private static String[] TYPESTR = {"png","jpg","bmp","gif","jpeg"};
     /**
      * 上传头像到oss
      *
@@ -54,13 +54,13 @@ public class OssServiceImpl implements OssService {
             OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
 
             //判断文件格式合法性
-            for (String type : TYPESTR) {
+           /* for (String type : TYPESTR) {
                 //判断文件名是否以 TYPESTR中的格式结尾
                 if(!StringUtils.endsWithIgnoreCase(file.getOriginalFilename(),type)){
                     return "格式不正确";
                 }
             }
-
+*/
             //判断文件内容
             BufferedImage image = ImageIO.read(file.getInputStream());
             if(image == null){

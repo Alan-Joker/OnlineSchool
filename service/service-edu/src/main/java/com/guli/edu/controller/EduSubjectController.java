@@ -49,7 +49,7 @@ public class EduSubjectController {
         List<OneSubject> list = subjectService.getTree();
 
         if(list != null){
-            return Result.ok().data("subjectList",list);
+            return Result.ok().data("OneSubjectDto",list);
         }else {
             return Result.error();
         }

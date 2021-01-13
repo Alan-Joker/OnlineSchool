@@ -32,13 +32,13 @@ public class TeacherController {
     @Autowired
     private TeacherService eduTeacherService;
 
-    /*@ApiOperation(value = "所有讲师列表")
-    @GetMapping("/getList")
+    @ApiOperation(value = "所有讲师列表")
+    @GetMapping("/findAll")
     public Result getTeacherList(){
         List<EduTeacher> list = eduTeacherService.list(null);
 
-        return Result.ok().data("list",list);
-    }*/
+        return Result.ok().data("items",list);
+    }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "根据讲师ID进行逻辑删除操作")
