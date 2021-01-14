@@ -22,4 +22,25 @@ public interface ChapterService extends IService<Chapter> {
      * @return
      */
     List<OneChapter> getVoById(String id);
+
+    /**
+     * 保存章节信息
+     * @param chapter
+     * @return
+     */
+    boolean saveChapter(Chapter chapter);
+
+    /**
+     * 修改章节
+     * @param chapter
+     * @return
+     */
+    boolean updateChapter(Chapter chapter);
+
+    /**
+     * 根据章节id删除章节信息
+     * @param id
+     * @return
+     */
+    Boolean removeChapterById(String id);
 }
