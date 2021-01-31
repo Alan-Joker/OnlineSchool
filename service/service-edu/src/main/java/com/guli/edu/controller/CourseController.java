@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.guli.base.entity.Result;
 import com.guli.edu.entity.Course;
 import com.guli.edu.entity.CourseDescription;
+import com.guli.edu.entity.vo.CoursePublishVo;
 import com.guli.edu.entity.vo.CourseQuery;
 import com.guli.edu.entity.vo.CourseVo;
 import com.guli.edu.service.CourseDescriptionService;
@@ -100,6 +101,16 @@ public class CourseController {
         }else {
             return Result.error();
         }
+    }
+
+    /**
+     * 根据课程ID查询发布课程的详情
+     */
+
+    @GetMapping("vo/{id}")
+    public Result getCoursePublishVoById(@PathVariable String id){
+        CoursePublishVo vo =courseService.getCoursePublishVoById(id);
+        return Result.ok().data("coursePublishVo",vo);
     }
 }
 

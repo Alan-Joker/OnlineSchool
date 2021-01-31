@@ -64,6 +64,7 @@ public class ChapterController {
      * 回显
      */
     @GetMapping("get/{id}")
+    @ApiOperation("修改章节信息前的回显")
     public Result getChapterById(@PathVariable String id){
         Chapter capter = chapterService.getById(id);
         return Result.ok().data("chapter",capter);
@@ -73,6 +74,7 @@ public class ChapterController {
      * 修改
      */
     @PutMapping("/update")
+    @ApiOperation("章节修改操作")
     public Result updateById(@RequestBody Chapter chapter){
         try {
             chapterService.updateChapter(chapter);
@@ -83,6 +85,7 @@ public class ChapterController {
         }
     }
     @DeleteMapping("{id}")
+    @ApiOperation("根据Id删除章节")
     public Result deleteById(@PathVariable String id){
         try {
             Boolean flag = chapterService.removeChapterById(id);

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.guli.edu.entity.Course;
 import com.guli.edu.entity.CourseDescription;
+import com.guli.edu.entity.vo.CoursePublishVo;
 import com.guli.edu.entity.vo.CourseQuery;
 import com.guli.edu.entity.vo.CourseVo;
 import com.guli.edu.mapper.CourseDescriptionMapper;
@@ -122,6 +123,12 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         //删除基本信息
         int i = baseMapper.deleteById(id);
         return i == 1;
+    }
+
+    @Override
+    public CoursePublishVo getCoursePublishVoById(String id) {
+        CoursePublishVo vo = baseMapper.getCoursePublishVoById(id);
+        return vo;
     }
 
 

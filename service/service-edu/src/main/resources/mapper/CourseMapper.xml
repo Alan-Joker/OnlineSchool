@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guli.edu.mapper.CourseMapper">
+
+    <select id="getCoursePublishVoById" parameterType="string" resultType="com.guli.edu.entity.vo.CoursePublishVo">
+    SELECT
+			et.`name` as teacherName,
+			et.id,
+			ec.cover,
+			ec.lesson_num AS lessonNum,
+			ec.title,
+			CONVERT(ec.price,DECIMAL(8,2)) AS price,
+			es1.title as subjectParentTitle,
+			es2.title as subjectTitle
+
+	FROM edu_course ec
+	LEFT JOIN edu_teacher et
+	ON ec.teacher_id = et.id
+	LEFT JOIN edu_subject es1
+	ON ec.subject_parent_id = es1.id
+	LEFT JOIN edu_subject es2
+	ON ec.subject_id = es2.id
+	WHERE ec.id = #{id};
+    </select>
+
+</mapper>

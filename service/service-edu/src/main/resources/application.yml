@@ -18,6 +18,10 @@ spring:
     username: root
     password: root
     #mybatisplus 日志
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -26,3 +30,10 @@ mybatis-plus:
     db-config:
       logic-delete-value: 1
       logic-not-delete-value: 0
+  mapper-locations: classpath:/mapper/**.xml
+  type-aliases-package: com.guli.edu.entity
+
+#开启熔断机制
+feign:
+  hystrix:
+    enabled: true

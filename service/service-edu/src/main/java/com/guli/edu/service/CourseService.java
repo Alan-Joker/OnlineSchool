@@ -3,6 +3,7 @@ package com.guli.edu.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.guli.edu.entity.Course;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.guli.edu.entity.vo.CoursePublishVo;
 import com.guli.edu.entity.vo.CourseQuery;
 import com.guli.edu.entity.vo.CourseVo;
 
@@ -40,4 +41,9 @@ public interface CourseService extends IService<Course> {
     void getPageList(Page<Course> coursePage, CourseQuery courseQuery);
 
     Boolean deleteById(String id);
+
+    /**
+     * 根据课程ID查询发布课程的详情
+     */
+    CoursePublishVo getCoursePublishVoById(String id);
 }
