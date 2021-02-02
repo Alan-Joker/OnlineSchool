@@ -17,6 +17,7 @@
         <module>service-common</module>
         <module>service-oss</module>
         <module>servuce-vod</module>
+        <module>service-cms</module>
     </modules>
     <packaging>pom</packaging>
 
