@@ -1,9 +1,9 @@
 server:
-  port: 8004
+  port: 8006
 
 spring:
   application:
-    name: service-cms
+    name: service-ucenter
   # json日期格式化
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -11,16 +11,14 @@ spring:
   # 环境设置：dev、test、prod
   profiles:
     active: dev
+
   # mysql数据库连接
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/guli_etu?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     username: root
     password: root
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
+
   redis:
     host: 39.106.140.83
     port: 6379
@@ -31,7 +29,6 @@ spring:
         max-idle: 500
         min-idle: 0
     timeout: 500
-#mybatisplus 日志
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -41,9 +38,4 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
   mapper-locations: classpath:/mapper/**.xml
-  type-aliases-package: com.guli.cms.entity
-
-#开启熔断机制
-feign:
-  hystrix:
-    enabled: true
+  type-aliases-package: com.guli.user.entity

@@ -1,0 +1,29 @@
+server:
+  port: 8005
+
+spring:
+  application:
+    name: service-sms
+  # json日期格式化
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  # 环境设置：dev、test、prod
+  profiles:
+    active: dev
+
+  redis:
+    host: 39.106.140.83
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 500
+        max-wait: 500
+        max-idle: 500
+        min-idle: 0
+    timeout: 500
+  mail:
+    host: smtp.163.com
+    port: 25
+    username: tony_xb@163.com
+    password: CVMHZSQNSKAABUYI

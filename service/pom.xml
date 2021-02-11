@@ -18,6 +18,8 @@
         <module>service-oss</module>
         <module>servuce-vod</module>
         <module>service-cms</module>
+        <module>service-msm</module>
+        <module>service-usercenter</module>
     </modules>
     <packaging>pom</packaging>
 
