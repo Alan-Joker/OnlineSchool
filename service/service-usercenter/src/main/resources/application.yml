@@ -1,5 +1,5 @@
 server:
-  port: 8006
+  port: 8150
 
 spring:
   application:
@@ -39,3 +39,9 @@ mybatis-plus:
       logic-not-delete-value: 0
   mapper-locations: classpath:/mapper/**.xml
   type-aliases-package: com.guli.user.entity
+
+wx:
+  open:
+    app_id: wxed9954c01bb89b47
+    app_secret: a7482517235173ddb4083788de60b90e
+    redirect_url: http://guli.shop/api/ucenter/wx/callback

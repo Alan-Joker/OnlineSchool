@@ -84,7 +84,9 @@ public class JwtUtils {
 		if(StringUtils.isEmpty(jwtToken)) return null;
 		Jws<Claims> claimsJws = Jwts.parser().setSigningKey(getKeyInstance()).parseClaimsJws(jwtToken);
 		Claims claims = claimsJws.getBody();
-		JwtInfo jwtInfo = new JwtInfo(claims.get("id").toString(), claims.get("nickname").toString(), claims.get("avatar").toString());
+		//System.out.println(claims.get("id"));
+		//JwtInfo jwtInfo = new JwtInfo(claims.get("id").toString(), claims.get("nickname").toString(), claims.get("avatar").toString());
+		JwtInfo jwtInfo = new JwtInfo(claims.get("id").toString(), claims.get("nickname").toString(),null);
 //        JwtInfo jwtInfo = new JwtInfo(claims.get("id").toString(), claims.get("nickname").toString(), claims.get("avatar").toString(), claims.get("age").toString(), claims.get("sex").toString(), claims.get("mobile").toString());
 		return jwtInfo;
 	}

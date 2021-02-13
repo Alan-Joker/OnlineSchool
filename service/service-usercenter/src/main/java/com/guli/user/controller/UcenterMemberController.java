@@ -2,11 +2,15 @@ package com.guli.user.controller;
 
 
 import com.guli.base.entity.Result;
+import com.guli.base.utils.JwtInfo;
+import com.guli.base.utils.JwtUtils;
 import com.guli.user.entity.UcenterMember;
 import com.guli.user.entity.vo.RegisterVo;
 import com.guli.user.service.UcenterMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -39,6 +43,16 @@ public class UcenterMemberController {
     public Result register(@RequestBody RegisterVo registerVo){
         memberService.register(registerVo);
         return Result.ok();
+    }
+
+    /**
+     * 根据token获取登录信息
+     */
+    @GetMapping("getLoginInfo")
+    public Result getLoginInfo(HttpServletRequest request){
+        JwtInfo token = JwtUtils.getMemberIdByJwtToken(request);
+        //UcenterMember member = memberService.getById(token.getId());
+        return Result.ok().data("member",token);
     }
 
 }

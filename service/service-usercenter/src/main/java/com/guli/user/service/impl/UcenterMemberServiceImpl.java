@@ -67,6 +67,7 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         JwtInfo jwtInfo = new JwtInfo();
         jwtInfo.setId(mobileMember.getId());
         jwtInfo.setNickname(mobileMember.getNickname());
+        jwtInfo.setAvatar(mobileMember.getAvatar());
         String token = JwtUtils.getJwtToken(jwtInfo, 300);
 
         return token;
@@ -116,5 +117,14 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         ucenterMember.setPassword(password);
         ucenterMember.setNickname(nickname);
         baseMapper.insert(ucenterMember);
+    }
+
+    @Override
+    public UcenterMember getOpenIdMember(String openid) {
+
+        QueryWrapper<UcenterMember> wrapper = new QueryWrapper<>();
+        wrapper.eq("openid",openid);
+        UcenterMember ucenterMember = baseMapper.selectOne(wrapper);
+        return ucenterMember;
     }
 }
