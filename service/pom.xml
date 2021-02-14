@@ -20,6 +20,7 @@
         <module>service-cms</module>
         <module>service-msm</module>
         <module>service-usercenter</module>
+        <module>service-order</module>
     </modules>
     <packaging>pom</packaging>
 

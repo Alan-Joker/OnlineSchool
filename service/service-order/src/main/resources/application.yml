@@ -1,9 +1,9 @@
 server:
-  port: 8150
+  port: 8007
 
 spring:
   application:
-    name: service-ucenter
+    name: service-order
   # json日期格式化
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -11,28 +11,17 @@ spring:
   # 环境设置：dev、test、prod
   profiles:
     active: dev
-
   # mysql数据库连接
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/guli_etu?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     username: root
     password: root
-
+    #mybatisplus 日志
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-  redis:
-    host: 39.106.140.83
-    port: 6379
-    lettuce:
-      pool:
-        max-active: 500
-        max-wait: 500
-        max-idle: 500
-        min-idle: 0
-    timeout: 500
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -42,10 +31,9 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
   mapper-locations: classpath:/mapper/**.xml
-  type-aliases-package: com.guli.user.entity
+  type-aliases-package: com.guli.eduorder.entity
 
-wx:
-  open:
-    app_id: wxed9954c01bb89b47
-    app_secret: a7482517235173ddb4083788de60b90e
-    redirect_url: http://guli.shop/api/ucenter/wx/callback
+#开启熔断机制
+feign:
+  hystrix:
+    enabled: true

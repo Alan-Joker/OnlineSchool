@@ -4,12 +4,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.guli.base.entity.Result;
 import com.guli.edu.entity.Course;
 import com.guli.edu.entity.frontvo.CourseFrontVo;
+import com.guli.edu.entity.vo.CoursePublishVo;
 import com.guli.edu.service.CourseService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.crypto.Data;
 import java.util.Map;
 
 /**
@@ -31,5 +30,12 @@ public class CourseFrontController {
         Page<Course> coursePage = new Page<>(page,limit);
         Map<String,Object> map = courseService.getCourseFrontList(coursePage,courseFrontVo);
         return Result.ok().data(map);
+    }
+
+    //根据课程id查询课程信息
+    @PostMapping("getCourseInfoOrder/{id}")
+    public CoursePublishVo getCourseInfoOrder(@PathVariable String id){
+        CoursePublishVo courseVo = courseService.getCoursePublishVoById(id);
+        return courseVo;
     }
 }

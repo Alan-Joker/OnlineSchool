@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: guli-edu
+    name: service-edu
   # json日期格式化
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

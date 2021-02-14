@@ -2,11 +2,13 @@ package com.guli.user.controller;
 
 
 import com.guli.base.entity.Result;
+import com.guli.base.entity.ordervo.UcenterMemberOrder;
 import com.guli.base.utils.JwtInfo;
 import com.guli.base.utils.JwtUtils;
 import com.guli.user.entity.UcenterMember;
 import com.guli.user.entity.vo.RegisterVo;
 import com.guli.user.service.UcenterMemberService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,5 +57,14 @@ public class UcenterMemberController {
         return Result.ok().data("member",token);
     }
 
+    //根据用户id获取用户信息
+    @PostMapping("getUserInfoOrder/{id}")
+    public UcenterMemberOrder getUserInfoOrder(@PathVariable String id){
+        UcenterMember member = memberService.getById(id);
+        //将member中的值复制到UcenterMemberOrder
+        UcenterMemberOrder ucenterMemberOrder = new UcenterMemberOrder();
+        BeanUtils.copyProperties(member,ucenterMemberOrder);
+        return ucenterMemberOrder;
+    }
 }
 
