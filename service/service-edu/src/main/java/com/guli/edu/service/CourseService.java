@@ -3,9 +3,12 @@ package com.guli.edu.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.guli.edu.entity.Course;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.guli.edu.entity.frontvo.CourseFrontVo;
 import com.guli.edu.entity.vo.CoursePublishVo;
 import com.guli.edu.entity.vo.CourseQuery;
 import com.guli.edu.entity.vo.CourseVo;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -46,4 +49,7 @@ public interface CourseService extends IService<Course> {
      * 根据课程ID查询发布课程的详情
      */
     CoursePublishVo getCoursePublishVoById(String id);
+
+    Map<String, Object> getCourseFrontList(Page<Course> coursePage, CourseFrontVo courseFrontVo);
+
 }

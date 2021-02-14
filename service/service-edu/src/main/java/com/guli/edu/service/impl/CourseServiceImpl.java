@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.guli.edu.entity.Course;
 import com.guli.edu.entity.CourseDescription;
+import com.guli.edu.entity.EduTeacher;
+import com.guli.edu.entity.frontvo.CourseFrontVo;
 import com.guli.edu.entity.vo.CoursePublishVo;
 import com.guli.edu.entity.vo.CourseQuery;
 import com.guli.edu.entity.vo.CourseVo;
@@ -16,6 +18,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -129,6 +135,58 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     public CoursePublishVo getCoursePublishVoById(String id) {
         CoursePublishVo vo = baseMapper.getCoursePublishVoById(id);
         return vo;
+    }
+
+    //条件查询课程并分页
+    @Override
+    public Map<String, Object> getCourseFrontList(Page<Course> coursePage, CourseFrontVo courseFrontVo
+    ) {
+        QueryWrapper<Course> wrapper = new QueryWrapper<>();
+        //判断条件是否为空，不空拼接
+        if(!StringUtils.isEmpty(courseFrontVo.getSubjectParentId())){
+            //一级分类
+            wrapper.eq("subject_parent_id",courseFrontVo.getSubjectParentId());
+        }
+
+        if(!StringUtils.isEmpty(courseFrontVo.getSubjectId())){
+            //二级分类
+            wrapper.eq("subject_id",courseFrontVo.getSubjectId());
+        }
+
+        if(!StringUtils.isEmpty(courseFrontVo.getBuyCountSort())){
+            //关注度排序
+            wrapper.orderByDesc("buy_count");
+        }
+
+        if(!StringUtils.isEmpty(courseFrontVo.getBuyCountSort())){
+            //时间排序
+            wrapper.orderByDesc("gmt_create");
+        }
+
+        if(!StringUtils.isEmpty(courseFrontVo.getBuyCountSort())){
+            //价格排序
+            wrapper.orderByDesc("price");
+        }
+        baseMapper.selectPage(coursePage,wrapper);
+
+        List<Course> records = coursePage.getRecords();
+        long current = coursePage.getCurrent();
+        long size = coursePage.getSize();
+        long total = coursePage.getTotal();
+        long pages = coursePage.getPages();
+        //是否有下一页
+        boolean hasNext = coursePage.hasNext();
+        //是否有上一页
+        boolean hasPrevious = coursePage.hasPrevious();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("items",records);
+        map.put("size",size);
+        map.put("current",current);
+        map.put("total",total);
+        map.put("pages",pages);
+        map.put("hashNext",hasNext);
+        map.put("hasPrevious",hasPrevious);
+        return map;
     }
 
 
