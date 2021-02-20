@@ -68,7 +68,7 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         jwtInfo.setId(mobileMember.getId());
         jwtInfo.setNickname(mobileMember.getNickname());
         jwtInfo.setAvatar(mobileMember.getAvatar());
-        String token = JwtUtils.getJwtToken(jwtInfo, 300);
+        String token = JwtUtils.getJwtToken(jwtInfo, 1800);
 
         return token;
     }

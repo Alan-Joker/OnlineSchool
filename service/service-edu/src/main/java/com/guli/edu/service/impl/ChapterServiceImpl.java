@@ -5,8 +5,10 @@ import com.guli.base.exceptionhandler.GuliException;
 import com.guli.edu.entity.Chapter;
 import com.guli.edu.entity.EduSubject;
 import com.guli.edu.entity.Video;
+import com.guli.edu.entity.vo.ChapterVo;
 import com.guli.edu.entity.vo.OneChapter;
 import com.guli.edu.entity.vo.TwoVideo;
+import com.guli.edu.entity.vo.VideoVo;
 import com.guli.edu.mapper.ChapterMapper;
 import com.guli.edu.mapper.TeacherMapper;
 import com.guli.edu.service.ChapterService;
@@ -112,5 +114,55 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
             int i = baseMapper.deleteById(id);
             return i == 1;
         }
+    }
+
+    @Override
+    public List<ChapterVo> getChapterVideoByCourseId(String courseId) {
+        //1 根据课程id查询课程里面所有的章节
+        QueryWrapper<Chapter> wrapperChapter = new QueryWrapper<>();
+        wrapperChapter.eq("course_id",courseId);
+        List<Chapter> eduChapters = baseMapper.selectList(wrapperChapter);
+
+        //2 根据课程id查询课程里面所有的小节
+        QueryWrapper<Video> wrapperVideo = new QueryWrapper<>();
+        wrapperVideo.eq("course_id",courseId);
+        List<Video> eduVideos = videoService.list(wrapperVideo);
+
+        //创建list集合，用于最终封装数据
+        List<ChapterVo> finalList = new ArrayList<>();
+
+        //3 遍历查询章节list集合进行封装
+        //遍历查询章节list集合
+        for (int i = 0; i < eduChapters.size(); i++) {
+            //得到每个章节
+            Chapter eduChapter = eduChapters.get(i);
+            //eduChapter对象值复制到ChapterVo里面
+            ChapterVo chapterVo = new ChapterVo();
+            BeanUtils.copyProperties(eduChapter,chapterVo);
+            //把chapterVo放到最终list集合
+            finalList.add(chapterVo);
+
+            //创建集合，用于封装章节的小节
+            List<VideoVo> videoList = new ArrayList<>();
+
+            //4 遍历查询小节list集合，进行封装
+            for (int m = 0; m < eduVideos.size(); m++) {
+                //得到每个小节
+                Video eduVideo = eduVideos.get(m);
+                //判断：小节里面chapterid和章节里面id是否一样
+                if(eduVideo.getChapterId().equals(eduChapter.getId())) {
+                    //进行封装
+                    VideoVo videoVo = new VideoVo();
+                    BeanUtils.copyProperties(eduVideo, videoVo);
+                    //放到小节封装集合
+                    videoList.add(videoVo);
+                }
+            }
+
+            //把封装之后小节list集合，放到章节对象里面
+            chapterVo.setChildren(videoList);
+        }
+        return finalList;
+
     }
 }

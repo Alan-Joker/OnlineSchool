@@ -14,6 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient("service-edu")
 public interface EduClinet {
 
-    @PostMapping("eduservice/coursefront/getCourseInfoOrder/{id}")
+    @PostMapping("/eduservice/coursefront/getCourseInfoOrder/{id}")
      CoursePublishVo getCourseInfoOrder(@PathVariable("id") String id);
 }

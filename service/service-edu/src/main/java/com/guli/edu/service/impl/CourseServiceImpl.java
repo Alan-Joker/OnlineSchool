@@ -6,6 +6,7 @@ import com.guli.edu.entity.Course;
 import com.guli.edu.entity.CourseDescription;
 import com.guli.edu.entity.EduTeacher;
 import com.guli.edu.entity.frontvo.CourseFrontVo;
+import com.guli.edu.entity.frontvo.CourseWebVo;
 import com.guli.edu.entity.vo.CoursePublishVo;
 import com.guli.edu.entity.vo.CourseQuery;
 import com.guli.edu.entity.vo.CourseVo;
@@ -187,6 +188,14 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         map.put("hashNext",hasNext);
         map.put("hasPrevious",hasPrevious);
         return map;
+    }
+
+    //根据课程id，查询课程信息，更新浏览量
+    @Override
+    public CourseWebVo getBaseCourseInfo(String courseId) {
+        //获取课程信息
+        return baseMapper.getBaseCourseInfo(courseId);
+
     }
 
 
